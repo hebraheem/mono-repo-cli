@@ -7,9 +7,9 @@ async function getConfig(rawArgs) {
   const args = arg(
     {
       "--typescript": Boolean,
-      //   "--git": Boolean,
+      "--git": Boolean,
       "-ts": "--typescript",
-      //   "-g": "--git",
+      "-g": "--git",
     },
     {
       argv: rawArgs.slice(2),
@@ -20,10 +20,6 @@ async function getConfig(rawArgs) {
     directory: args._[0],
     typescript: args["--typescript"] || false,
     git: args["--git"] || false,
-    reactRouter: true,
-    storyBook: false,
-    styles: "MUI",
-    communication: "React-query",
     // redux: args["--redux"] || false,
   };
 
@@ -116,8 +112,11 @@ async function getConfig(rawArgs) {
     directory: options.directory || answers.directory,
     typescript: options.typescript || answers.typescript,
     git: options.git || answers.git,
-    // redux: options.redux || answers.redux,
     reactRouter: options.reactRouter || answers.reactRouter,
+    communication: options.communication || answers.communication,
+    storyBook: options.storyBook || answers.storyBook,
+    styles: options.styles || answers.styles,
+    // redux: options.redux || answers.redux,
   };
 }
 
