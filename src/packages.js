@@ -12,7 +12,7 @@ const packages = {
   //   reduxDependencies: ["redux", "react-redux"],
   "material-ui": [
     "@material-ui/core",
-    "@material-ui/lib",
+    "@material-ui/lab",
     "@material-ui/icons",
     "@material-ui/styles",
     "@material-ui/pickers",
@@ -165,10 +165,11 @@ export const packageList = (options) => {
       ? taskListGenerator("material-ui", packageList["material-ui"], true)
       : taskListGenerator("antd", packageList["antd"], true);
   const communication =
-    options.styles === "React-query"
+    options.communication === "React-query"
       ? taskListGenerator("react-query", packageList["react-query"], true)
-      : taskListGenerator("antd", packageList["graphQL"], true);
+      : taskListGenerator("graphQL", packageList["graphQL"], true);
 
+  console.log(stylePattern);
   const allPackages = [
     reactTask,
     testingTasks,

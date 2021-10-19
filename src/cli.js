@@ -10,16 +10,26 @@ async function getConfig(rawArgs) {
       "--git": Boolean,
       "-ts": "--typescript",
       "-g": "--git",
+      "--storyBook": Boolean,
+      "--reactRouter": Boolean,
+      "--communication": String,
+      "--styles": String,
     },
     {
       argv: rawArgs.slice(2),
     }
   );
 
+  console.log("args", arg);
+
   const options = {
     directory: args._[0],
     typescript: args["--typescript"] || false,
     git: args["--git"] || false,
+    // storyBook: args["--storyBook"] || false,
+    // reactRouter: args["--reactRouter"] || true,
+    // communication: args["--communication"],
+    // styles: args["--styles"],
     // redux: args["--redux"] || false,
   };
 
@@ -93,7 +103,7 @@ async function getConfig(rawArgs) {
       type: "list",
       choices: ["React-query", "graphQL"],
       message: "how do you want to talt to the server?",
-      default: "react-query",
+      default: "React-query",
     });
   }
 
@@ -106,7 +116,7 @@ async function getConfig(rawArgs) {
     });
   }
   const answers = await inquirer.prompt(questions);
-  console.log(options);
+
   return {
     pkgMgr: answers.pkgMgr,
     directory: options.directory || answers.directory,
@@ -120,8 +130,9 @@ async function getConfig(rawArgs) {
   };
 }
 
-// cli(process.argv);
-getConfig(process.argv);
+cli(process.argv);
+
+// getConfig(process.argv)
 
 async function cli(args) {
   const options = await getConfig(args);

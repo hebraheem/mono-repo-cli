@@ -13,7 +13,7 @@ export async function createProject(options) {
       ? "typescript"
       : options.communication === "React-query"
       ? "javascript"
-      : "javascripty-gql",
+      : "javascript",
     targetDirectory:
       options.targetDirectory || `${process.cwd()}/${options.directory}`,
   };

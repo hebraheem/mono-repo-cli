@@ -117,6 +117,6 @@ dist
 
 test-project/
 
-#might add back
-.ideas
-.codeclimate.yml
+# might add back
+idea
+*.yml
