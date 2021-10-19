@@ -42,7 +42,6 @@ const devPackages = {
     "@storybook/react",
   ],
   "prop-types": ["prop-types"],
-  prettier: ["prettier"],
 };
 
 const packageListGenerator = (pkgMgr, flags, packages, options) => {
@@ -152,11 +151,6 @@ export const packageList = (options) => {
     "prop-types",
     packageList["prop-types"],
     !options.typescript
-  );
-  const prettier = taskListGenerator(
-    "prettier",
-    packageList["prettier"],
-    options.prettier
   );
   const stylePattern =
     options.styles === "MUI"
