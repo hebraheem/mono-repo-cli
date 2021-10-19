@@ -20,17 +20,10 @@ async function getConfig(rawArgs) {
     }
   );
 
-  console.log("args", arg);
-
   const options = {
     directory: args._[0],
     typescript: args["--typescript"] || false,
     git: args["--git"] || false,
-    // storyBook: args["--storyBook"] || false,
-    // reactRouter: args["--reactRouter"] || true,
-    // communication: args["--communication"],
-    // styles: args["--styles"],
-    // redux: args["--redux"] || false,
   };
 
   const questions = [];
@@ -68,15 +61,6 @@ async function getConfig(rawArgs) {
       default: false,
     });
   }
-
-  //   if (!options.redux) {
-  //     questions.push({
-  //       name: "redux",
-  //       type: "confirm",
-  //       message: "Enable Redux",
-  //       default: false,
-  //     });
-  //   }
 
   if (!options.reactRouter) {
     questions.push({
@@ -126,13 +110,10 @@ async function getConfig(rawArgs) {
     communication: options.communication || answers.communication,
     storyBook: options.storyBook || answers.storyBook,
     styles: options.styles || answers.styles,
-    // redux: options.redux || answers.redux,
   };
 }
 
 cli(process.argv);
-
-// getConfig(process.argv)
 
 async function cli(args) {
   const options = await getConfig(args);

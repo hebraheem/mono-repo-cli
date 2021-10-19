@@ -9,7 +9,6 @@ const packages = {
     "@testing-library/react",
     "@testing-library/user-event",
   ],
-  //   reduxDependencies: ["redux", "react-redux"],
   "material-ui": [
     "@material-ui/core",
     "@material-ui/lab",
@@ -28,10 +27,8 @@ const packages = {
 };
 
 const devPackages = {
-  //   reduxDevDependencies: ["redux-logger", "redux-devtools-extension"],
   typescript: ["typescript"],
   reactTypes: ["@types/react", "@types/node", "@types/react-dom"],
-  // reduxTypes: ['@types/redux-logger', '@types/redux-devtools-extension', '@types/react-redux'],
   reactRouterTypes: ["@types/react-router-dom"],
   gitTools: ["husky", "lint-staged"],
   eslint: ["eslint-config-prettier", "eslint-plugin-prettier", "prettier"],
@@ -100,9 +97,6 @@ export const packageList = (options) => {
     packageList["reactRouter"],
     options.reactRouter
   );
-  // const reduxDepTask = taskListGenerator('Redux Dependencies', packageList['reduxDependencies'], options.redux)
-  // const reduxDevDepTask = taskListGenerator('Redux Development Dependencies', packageList['reduxDevDependencies'], options.redux)
-  // const reduxTask = taskListGenerator('Redux', [reduxDepTask, reduxDevDepTask], options.redux)
   const typeScriptSubTask = taskListGenerator(
     "TypeScript",
     packageList["typescript"],
@@ -113,7 +107,6 @@ export const packageList = (options) => {
     packageList["reactTypes"],
     true
   );
-  // const reduxTypeScriptTask = taskListGenerator('Types for Redux', packageList['reduxTypes'], options.redux)
   const reactRouterTypesTask = taskListGenerator(
     "Types for React Router",
     packageList["reactRouterTypes"],
@@ -141,7 +134,6 @@ export const packageList = (options) => {
       reactTypeScriptTask,
       testingTypescriptTask,
       reactRouterTypesTask,
-      //   reduxTypeScriptTask,
     ],
     options.typescript
   );
@@ -169,7 +161,6 @@ export const packageList = (options) => {
       ? taskListGenerator("react-query", packageList["react-query"], true)
       : taskListGenerator("graphQL", packageList["graphQL"], true);
 
-  console.log(stylePattern);
   const allPackages = [
     reactTask,
     testingTasks,
