@@ -42,6 +42,7 @@ const devPackages = {
     "@storybook/react",
   ],
   "prop-types": ["prop-types"],
+  prettier: ["prettier"],
 };
 
 const packageListGenerator = (pkgMgr, flags, packages, options) => {
@@ -152,6 +153,11 @@ export const packageList = (options) => {
     packageList["prop-types"],
     !options.typescript
   );
+  const prettier = taskListGenerator(
+    "prettier",
+    packageList["prettier"],
+    options.prettier
+  );
   const stylePattern =
     options.styles === "MUI"
       ? taskListGenerator("material-ui", packageList["material-ui"], true)
@@ -172,6 +178,7 @@ export const packageList = (options) => {
     communication,
     storyBook,
     propTypes,
+    prettier,
   ];
 
   return taskListGenerator("Package Install", allPackages, true);

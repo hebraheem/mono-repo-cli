@@ -99,6 +99,15 @@ async function getConfig(rawArgs) {
       default: false,
     });
   }
+
+  if (!options.prettier) {
+    questions.push({
+      name: "prettier",
+      type: "confirm",
+      message: "want to use prettier?",
+      default: true,
+    });
+  }
   const answers = await inquirer.prompt(questions);
 
   return {
@@ -110,6 +119,7 @@ async function getConfig(rawArgs) {
     communication: options.communication || answers.communication,
     storyBook: options.storyBook || answers.storyBook,
     styles: options.styles || answers.styles,
+    prettier: options.prettier || answers.prettier,
   };
 }
 
