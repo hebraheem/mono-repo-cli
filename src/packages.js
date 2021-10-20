@@ -3,6 +3,7 @@ import Listr from "listr";
 
 const packages = {
   react: ["react", "react-dom", "react-scripts"],
+  decodeJwt: ["jwt-decode"],
   reactRouter: ["react-router-dom"],
   testing: [
     "@testing-library/jest-dom",
@@ -107,6 +108,11 @@ export const packageList = (options) => {
     packageList["reactTypes"],
     true
   );
+  const decodeJWT = taskListGenerator(
+    "decodejwt",
+    packageList["jwt-decode"],
+    options.decodeJWT
+  );
   const reactRouterTypesTask = taskListGenerator(
     "Types for React Router",
     packageList["reactRouterTypes"],
@@ -172,7 +178,7 @@ export const packageList = (options) => {
     communication,
     storyBook,
     propTypes,
-    prettier,
+    decodeJWT,
   ];
 
   return taskListGenerator("Package Install", allPackages, true);

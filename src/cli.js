@@ -62,6 +62,15 @@ async function getConfig(rawArgs) {
     });
   }
 
+  if (!options.decodeJWT) {
+    questions.push({
+      name: "decodeJWT",
+      type: "confirm",
+      message: "add jwt-decode ?",
+      default: true,
+    });
+  }
+
   if (!options.reactRouter) {
     questions.push({
       name: "reactRouter",
@@ -111,6 +120,7 @@ async function getConfig(rawArgs) {
     communication: options.communication || answers.communication,
     storyBook: options.storyBook || answers.storyBook,
     styles: options.styles || answers.styles,
+    decodeJWT: options.decodeJWT || answers.decodeJWT,
   };
 }
 
