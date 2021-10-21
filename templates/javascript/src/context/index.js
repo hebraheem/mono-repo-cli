@@ -1,11 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { ReactQueryConfigProvider, QueryCache } from "react-query";
+import { QueryClientProvider, QueryClient } from "react-query";
 import PropTypes from "prop-types";
 
 import { NotificationProvider } from "reusables/NotificationBanner";
 
-const queryCache = new QueryCache();
+// const queryCache = new QueryCache();
+
+const queryClient = new QueryClient();
 
 const reactQueryConfig = {
   queries: {
@@ -28,13 +30,15 @@ const reactQueryConfig = {
   },
 };
 
-const AppProviders = ({ children }) => (
-  <ReactQueryConfigProvider config={reactQueryConfig} queryCache={queryCache}>
-    <NotificationProvider>
-      <Router>{children}</Router>
-    </NotificationProvider>
-  </ReactQueryConfigProvider>
-);
+const AppProviders = ({ children }) => {
+  return (
+    <QueryClientProvider config={reactQueryConfig} client={queryClient}>
+      <Router>
+        <NotificationProvider>{children}</NotificationProvider>
+      </Router>
+    </QueryClientProvider>
+  );
+};
 
 AppProviders.propTypes = {
   children: PropTypes.node.isRequired,

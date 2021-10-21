@@ -10,11 +10,19 @@ function addToPackageJson(options) {
     build: "react-scripts build",
     test: "react-scripts test",
     eject: "react-scripts eject",
+    format: 'prettier --write "**/*.+(js|jsx|json|css|md)"',
+    "format:check": 'prettier --list-different "src/**/*.{js,jsx,json,css,md}"',
+    storybook: options.storyBook ? "start-storybook -p 9009 -s public" : "",
+    "build-storybook": options.storyBook ? "build-storybook -s public" : "",
   };
 
   const lintStaged = {
     "*.+(js|jsx|tsx)": ["eslint --fix"],
-    "*.+(json|css|md)": ["prettier --write"],
+    "*.+(json|css|md)": ["prettier --write", "git add"],
+  };
+
+  const eslintConfig = {
+    extends: ["react-app", "react-app/jest"],
   };
 
   const browserslist = {
@@ -38,7 +46,13 @@ function addToPackageJson(options) {
     console.log("file not found");
   }
 
-  const newData = { ...data, scripts, browserslist, "lint-staged": lintStaged };
+  const newData = {
+    ...data,
+    scripts,
+    browserslist,
+    "lint-staged": lintStaged,
+    eslintConfig,
+  };
   const newJSONData = JSON.stringify(newData, null, 2);
   fs.writeFileSync(filename, newJSONData);
 }

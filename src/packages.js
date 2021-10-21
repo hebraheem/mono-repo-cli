@@ -2,7 +2,7 @@ import execa from "execa";
 import Listr from "listr";
 
 const packages = {
-  react: ["react", "react-dom", "react-scripts"],
+  react: ["react", "react-dom", "react-scripts", "babel-loader@8.1.0"],
   decodeJwt: ["jwt-decode"],
   reactRouter: ["react-router-dom"],
   testing: [
@@ -18,7 +18,7 @@ const packages = {
     "@material-ui/pickers",
   ],
   antd: ["antd"],
-  "react-query": ["react-query"],
+  "react-query": ["react-query", "react-query-devtools"],
   graphQL: [
     "graphql",
     "@apollo/client",
@@ -32,7 +32,7 @@ const devPackages = {
   reactTypes: ["@types/react", "@types/node", "@types/react-dom"],
   reactRouterTypes: ["@types/react-router-dom"],
   gitTools: ["husky", "lint-staged"],
-  eslint: ["eslint-config-prettier", "eslint-plugin-prettier", "prettier"],
+  prettier: ["prettier"],
   testingTypes: ["@types/jest"],
   storyBook: [
     "@storybook/addon-actions",
@@ -123,9 +123,9 @@ export const packageList = (options) => {
     packageList["gitTools"],
     true
   );
-  const eslintTasks = taskListGenerator(
-    "Eslint with Prettier",
-    packageList["eslint"],
+  const prettierTasks = taskListGenerator(
+    "Prettier",
+    packageList["prettier"],
     true
   );
   const testingTypescriptTask = taskListGenerator(
@@ -172,7 +172,7 @@ export const packageList = (options) => {
     testingTasks,
     reactRouterTask,
     gitToolsTasks,
-    eslintTasks,
+    prettierTasks,
     typescriptTask,
     stylePattern,
     communication,

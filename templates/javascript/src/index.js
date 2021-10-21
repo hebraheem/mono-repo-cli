@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { ReactQueryDevtools } from "react-query-devtools";
 
 import { AppProviders } from "./context";
 
@@ -11,6 +12,7 @@ ReactDOM.render(
     <AppProviders>
       <App />
     </AppProviders>
+    <ReactQueryDevtools initialIsOpen={false} />
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -1,20 +1,26 @@
 // This components handle the notification view using material ui Snackbar
 // It also handles notification queues and stacks them in a queue so they popup one after the other
 
-import React, { useState } from 'react';
-import { Snackbar, makeStyles } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import { Snackbar, makeStyles } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+import PropTypes from "prop-types";
 
-import { usePrevious } from 'hooks/usePrevious';
-import { useUpdateEffect } from 'hooks/useUpdateEffect';
-import { fontWeight } from '../../Css';
+import { usePrevious } from "hooks/usePrevious";
+import { useUpdateEffect } from "hooks/useUpdateEffect";
+import { fontWeight } from "../../Css";
 
 const Alert = (props) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
 
-const DefaultNotificationView = ({ style, message, description, id, duration = 'long' }) => {
+const DefaultNotificationView = ({
+  style,
+  message,
+  description,
+  id,
+  duration = "long",
+}) => {
   const [isBannerHidden, setIsBannerHidden] = useState(true);
   const queueRef = React.useRef([]);
   const [messageInfo, setMessageInfo] = React.useState(undefined);
@@ -47,7 +53,7 @@ const DefaultNotificationView = ({ style, message, description, id, duration = '
   };
 
   const handleCloseBanner = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setIsBannerHidden(true);
@@ -57,20 +63,27 @@ const DefaultNotificationView = ({ style, message, description, id, duration = '
     processQueue();
   };
 
-  let snackbarDuration = messageInfo ? (messageInfo.duration === 'short' ? 1000 : 5000) : 1000;
+  let snackbarDuration = messageInfo
+    ? messageInfo.duration === "short"
+      ? 1000
+      : 5000
+    : 1000;
   return (
     <Snackbar
       key={messageInfo ? messageInfo.id : undefined}
       onExited={handleExited}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       open={isBannerHidden === false}
       autoHideDuration={snackbarDuration}
       onClose={handleCloseBanner}
       style={{ zIndex: 99999 }}
-      className={classes.container}>
+      className={classes.container}
+    >
       {messageInfo && (
         <Alert onClose={handleCloseBanner} severity={messageInfo.style}>
-          {messageInfo.message && <p className="title">{messageInfo.message}</p>}
+          {messageInfo.message && (
+            <p className="title">{messageInfo.message}</p>
+          )}
           {messageInfo.description && (
             <p dangerouslySetInnerHTML={{ __html: messageInfo.description }} />
           )}
@@ -82,10 +95,10 @@ const DefaultNotificationView = ({ style, message, description, id, duration = '
 
 const useStyles = makeStyles({
   container: {
-    '& p': {
+    "& p": {
       margin: 0,
     },
-    '& p.title': {
+    "& p.title": {
       fontWeight: fontWeight.bold,
     },
   },
@@ -93,9 +106,9 @@ const useStyles = makeStyles({
 
 DefaultNotificationView.prototype = {
   text: PropTypes.string,
-  style: PropTypes.oneOf(['success', 'warning', 'error', 'info']),
+  style: PropTypes.oneOf(["success", "warning", "error", "info"]),
   id: PropTypes.number,
-  duration: PropTypes.oneOf(['long', 'short', PropTypes.number]),
+  duration: PropTypes.oneOf(["long", "short", PropTypes.number]),
 };
 
 export default React.memo(DefaultNotificationView);
